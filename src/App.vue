@@ -1,36 +1,63 @@
 <template>
   <v-app>
     <v-navigation-drawer
+      temporary
       fixed
       clipped
       app
       v-model="drawer"
     >
       <v-list dense>
+        <template v-for="(data, i) in sampleData">
+          <v-layout
+            row
+            :key="i"
+            mb-1
+          >
+            <v-flex xs6 offset-xs1>
+              
+            </v-flex>
+          </v-layout>
+        </template>
+        <v-layout row>
+          <v-flex xs5 offset-xs1>
+            <v-subheader>size</v-subheader>
+          </v-flex>
+          <v-flex xs5 offset-xs1>
+            <v-subheader>mass</v-subheader>
+          </v-flex>
+        </v-layout>
         <template v-for="(sieve, i) in sieveData">
           <v-layout
             row
             :key="i"
+            mb-1
           >
-            <v-flex xs4 offset-xs1>
+            <v-flex xs5 offset-xs1>
               <v-text-field
-                :model="sieve.size"
+                :v-model="sieve.size"
                 :value="sieve.size"
+                suffix="mm"
+                solo
+                light
               ></v-text-field>
             </v-flex>
             <v-flex xs4 offset-xs1>
               <v-text-field
                 light
-                :model="sieve.mass"
+                :v-model="sieve.mass"
                 :value="sieve.mass"
+                suffix="g"
+                solo
               ></v-text-field>
             </v-flex>
           </v-layout>
         </template>
       </v-list>
-      <v-btn @click.stop="resetSieveData()">
-        reset sieve
-      </v-btn>
+      <v-layout row>
+        <v-btn flat color="secondary" @click.stop="addSieve()">Add</v-btn>
+        <v-btn flat color="secondary" @click.stop="removeSieve()">Remove</v-btn>
+      </v-layout>
     </v-navigation-drawer>
     <v-toolbar
       color="blue darken-3"
@@ -44,6 +71,15 @@
         <span class="hidden-xs-only">Sieve</span>
       </v-toolbar-title>
     </v-toolbar>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+            <v-btn icon large>
+              <v-icon large>code</v-icon>
+            </v-btn>
+        </v-layout>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
@@ -51,35 +87,39 @@
   export default {
     data () {
       return {
-        /* sieveData: an input field is rendered for each element in array.
-           can be mutated by resetSieveData () and addSieve () */
         sieveData: [],
         drawer: null
       }
     },
     methods: {
-      resetSieveData () {
-        /* set sieveData to empty array and repopulate with default values */
-        const defaultSieveSizes = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08]
-        this.sieveData = []
-        for (let i in defaultSieveSizes) {
-          let defaultSieve = {
-            'size': defaultSieveSizes[i],
-            'mass': 0
+      /* populates sieveData with a default set of sieve sizes */
+      populateSieveData () {
+        if (this.sieveData.length === 0) {
+          const defaultSieveSizes = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08]
+          for (let i in defaultSieveSizes) {
+            let defaultSieve = {
+              'size': defaultSieveSizes[i],
+              'mass': 0
+            }
+            this.sieveData.push(defaultSieve)
           }
-          this.sieveData.push(defaultSieve)
         }
       },
       addSieve () {
-        /* results in new blank input line being rendered for user to add more sieve data */
+        /* adds a new blank/zero input line for user to add more sieve data */
         this.sieveData.push({
           'size': 0,
           'mass': 0
         })
+      },
+      removeSieve () {
+        if (this.sieveData.length > 0) {
+          this.sieveData.pop()
+        }
       }
     },
     created: function () {
-      this.resetSieveData()
+      this.populateSieveData()
     }
   }
 </script>
