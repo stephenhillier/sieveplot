@@ -1,48 +1,33 @@
 <template>
-  <s-header></s-header>
+<div>
+  <div class="m-b-1">
+  <s-header id="header"></s-header>
+  </div>
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column is-4">
+        <s-input id="input"></s-input>
+      </div>
+      <div class="column">
+        <s-output id="output"></s-output>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
   import Header from '@/components/Header'
+  import Input from '@/components/Input'
+  import Output from '@/components/Output'
   export default {
     components: {
-      's-header': Header
-    },
-    data () {
-      return {
-        sieveData: [],
-        drawer: null
-      }
-    },
-    methods: {
-      /* populates sieveData with a default set of sieve sizes */
-      populateSieveData () {
-        if (this.sieveData.length === 0) {
-          const defaultSieveSizes = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08]
-          for (let i in defaultSieveSizes) {
-            let defaultSieve = {
-              'size': defaultSieveSizes[i],
-              'mass': 0
-            }
-            this.sieveData.push(defaultSieve)
-          }
-        }
-      },
-      addSieve () {
-        /* adds a new blank/zero input line for user to add more sieve data */
-        this.sieveData.push({
-          'size': 0,
-          'mass': 0
-        })
-      },
-      removeSieve () {
-        if (this.sieveData.length > 0) {
-          this.sieveData.pop()
-        }
-      }
-    },
-    created: function () {
-      this.populateSieveData()
+      's-header': Header,
+      's-input': Input,
+      's-output': Output
     }
   }
 </script>
+<style lang="css" scoped>
+.m-b-1 { margin-bottom: 1rem; }
+</style>
