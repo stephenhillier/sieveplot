@@ -5,10 +5,10 @@
   </div>
   <div class="container is-fluid">
     <div class="columns">
-      <div class="column is-4">
+      <div class="column is-4 p-a-1">
         <s-input id="input"></s-input>
       </div>
-      <div class="column">
+      <div class="column p-a-1">
         <s-output id="output"></s-output>
       </div>
     </div>
@@ -30,4 +30,6 @@
 </script>
 <style lang="css" scoped>
 .m-b-1 { margin-bottom: 1rem; }
+.p-a-1 { padding-left: 1rem;
+         padding-right: 1rem; }
 </style>
