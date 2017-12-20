@@ -1,90 +1,13 @@
 <template>
-  <v-app>
-    <v-navigation-drawer
-      temporary
-      fixed
-      clipped
-      app
-      v-model="drawer"
-    >
-      <v-list dense>
-        <template v-for="(data, i) in sampleData">
-          <v-layout
-            row
-            :key="i"
-            mb-1
-          >
-            <v-flex xs6 offset-xs1>
-              
-            </v-flex>
-          </v-layout>
-        </template>
-        <v-layout row>
-          <v-flex xs5 offset-xs1>
-            <v-subheader>size</v-subheader>
-          </v-flex>
-          <v-flex xs5 offset-xs1>
-            <v-subheader>mass</v-subheader>
-          </v-flex>
-        </v-layout>
-        <template v-for="(sieve, i) in sieveData">
-          <v-layout
-            row
-            :key="i"
-            mb-1
-          >
-            <v-flex xs5 offset-xs1>
-              <v-text-field
-                :v-model="sieve.size"
-                :value="sieve.size"
-                suffix="mm"
-                solo
-                light
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs4 offset-xs1>
-              <v-text-field
-                light
-                :v-model="sieve.mass"
-                :value="sieve.mass"
-                suffix="g"
-                solo
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-        </template>
-      </v-list>
-      <v-layout row>
-        <v-btn flat color="secondary" @click.stop="addSieve()">Add</v-btn>
-        <v-btn flat color="secondary" @click.stop="removeSieve()">Remove</v-btn>
-      </v-layout>
-    </v-navigation-drawer>
-    <v-toolbar
-      color="blue darken-3"
-      dark
-      app
-      clipped-left
-      fixed
-    >
-      <v-toolbar-title :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-xs-only">Sieve</span>
-      </v-toolbar-title>
-    </v-toolbar>
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-            <v-btn icon large>
-              <v-icon large>code</v-icon>
-            </v-btn>
-        </v-layout>
-      </v-container>
-    </v-content>
-  </v-app>
+  <s-header></s-header>
 </template>
 
 <script>
+  import Header from '@/components/Header'
   export default {
+    components: {
+      's-header': Header
+    },
     data () {
       return {
         sieveData: [],
