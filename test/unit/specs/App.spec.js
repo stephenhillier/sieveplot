@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from '@/App'
 
-describe('HelloWorld.vue', () => {
+describe('App.vue', () => {
   it('should render header, input and output components', () => {
     const Constructor = Vue.extend(App)
     const vm = new Constructor().$mount()
