@@ -9,7 +9,7 @@
           <label class="label is-small">{{ sampleProperty.description }}</label>
           <div class="field has-addons">
             <p class="control">
-              <input class="input is-small" type="text" :value="sampleProperty.value" placeholder="Mass">
+              <input class="input is-small" type="number" v-model.number="sampleProperty.value" placeholder="Mass">
             </p>
             <p class="control">
               <a class="button is-static is-small">
@@ -25,7 +25,7 @@
             <label v-if="!i" class="label is-small">Sieve size</label>
             <div class="field has-addons">
               <p class="control">
-                <input class="input is-small" type="text" placeholder="Size" :value="sieve.size" :model="sieve.size">
+                <input class="input is-small" placeholder="Size" v-model.number="sieve.size" type="number">
               </p>
               <p class="control p-r-2">
                 <a class="button is-static is-small">
@@ -38,7 +38,7 @@
             <label v-if="!i" class="label is-small">Recorded mass</label>
             <div class="field has-addons">
               <p class="control">
-                <input class="input is-small" type="text" placeholder="Mass" :value="sieve.mass" :model="sieve.mass">
+                <input class="input is-small" placeholder="Mass" v-model.number="sieve.mass" type="number">
               </p>
               <p class="control">
                 <a class="button is-static is-small">
@@ -85,11 +85,7 @@
         ]
       }
     },
-    computed: {
-      percentPassing () {
-
-      }
-    },
+    computed: {},
     methods: {
       /* populates sieveData with a default set of sieve sizes */
       populateSieveData () {
@@ -97,10 +93,10 @@
           const defaultSieveSizes = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08, 'Pan']
           for (let i in defaultSieveSizes) {
             let defaultSieve = {
-              'size': defaultSieveSizes[i],
-              'mass': 0,
-              'sizeUnit': 'mm',
-              'massUnit': 'g'
+              size: defaultSieveSizes[i],
+              mass: 0,
+              sizeUnit: 'mm',
+              massUnit: 'g'
             }
             this.sieveData.push(defaultSieve)
           }
@@ -109,10 +105,10 @@
       addSieve () {
         /* adds a new blank/zero input line for user to add more sieve data */
         this.sieveData.push({
-          'size': 0,
-          'mass': 0,
-          'sizeUnit': 'mm',
-          'massUnit': 'g'
+          size: 0,
+          mass: 0,
+          sizeUnit: 'mm',
+          massUnit: 'g'
         })
       },
       removeSieve () {
@@ -129,4 +125,15 @@
 <style lang="css">
 .m-0 { margin: 0rem; }
 .p-r-2 { padding-right: 2rem; }
+
+/* hide number input field spinner */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 </style>
