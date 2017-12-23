@@ -25,7 +25,7 @@
             <label v-if="!i" class="label is-small">Sieve size</label>
             <div class="field has-addons">
               <p class="control">
-                <input class="input is-small" placeholder="Size" v-model.number="sieve.size" type="number">
+                <input class="input is-small" placeholder="Size" v-model.number="sieve.size" type="text">
               </p>
               <p class="control p-r-2">
                 <a class="button is-static is-small">
@@ -85,7 +85,32 @@
         ]
       }
     },
-    computed: {},
+    computed: {
+      totalMass () {
+        return this.sieveData.reduce((total, sieve) => {
+          if (typeof sieve.mass === 'number') {
+            return total + sieve.mass
+          } else {
+            return total
+          }
+        }, 0)
+      },
+      calculatePercentPassing () {
+        var sieveResult = []
+        var sieves = this.sieveData
+        for (let i in sieves) {
+          var massPassing = this.totalMass - sieves.slice(0, i + 1).reduce((total, currentSieve) => {
+            return total + currentSieve.mass
+          }, 0)
+          sieveResult.push({
+            size: sieves[i].size,
+            mass: sieves[i].mass,
+            passing: massPassing
+          })
+        }
+        return sieveResult
+      }
+    },
     methods: {
       /* populates sieveData with a default set of sieve sizes */
       populateSieveData () {
