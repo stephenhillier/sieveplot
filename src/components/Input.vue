@@ -25,7 +25,7 @@
             <label v-if="!i" class="label is-small">Sieve size</label>
             <div class="field has-addons">
               <p class="control">
-                <input class="input is-small" placeholder="Size" v-model.number="sieve.size" type="text">
+                <input class="input is-small" type="text" v-model.number="sieve.size" placeholder="Size">
               </p>
               <p class="control p-r-2">
                 <a class="button is-static is-small">
@@ -88,6 +88,7 @@
     computed: {
       totalMass () {
         return this.sieveData.reduce((total, sieve) => {
+          /* calculate total mass of all sieves but skip non-numeric inputs */
           if (typeof sieve.mass === 'number') {
             return total + sieve.mass
           } else {
