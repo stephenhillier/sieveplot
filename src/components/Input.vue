@@ -49,7 +49,6 @@
           </div>
         </div>
       </template>
-    <a class="button is-link is-outlined" @click.stop="testCalculatePercentPassing()">Outlined</a>  
     </div>
     
   </article>
