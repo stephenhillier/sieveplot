@@ -110,11 +110,11 @@
       calculatePercentPassing () {
         let sieveResult = []
         const sieves = this.sieveData
-        /* 
+        /*
         We need to calculate the mass of soil that "passed through" each sieve (as opposed to the mass
         that was retained) in order to plot the result. To do this, start at the first sieve in the
         array. Subtract the mass retained in that sieve from the total mass of the sample. Then
-        subtract the mass retained in the second sieve, third sieve and so on to calculate the mass 
+        subtract the mass retained in the second sieve, third sieve and so on to calculate the mass
         that passed through each sieve.
 
         The code below runs once for each sieve and calls array.prototype.reduce() with a sum function
