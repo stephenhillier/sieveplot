@@ -4,12 +4,12 @@
       <p>Sample info and test data input</p>
     </div>
     <div class="message-body">
-      <template v-for="sampleProperty in sampleData">
+      <template v-for="sampleProperty in sampleDataForm">
         <div :key="sampleProperty.property" class="field">
           <label class="label is-small">{{ sampleProperty.description }}</label>
           <div class="field has-addons">
             <p class="control">
-              <input class="input is-small" type="number" v-model.number="sampleProperty.value" placeholder="Mass">
+              <input class="input is-small" type="number" v-model.number="sampleData[sampleProperty.property]" placeholder="Mass">
             </p>
             <p class="control">
               <a class="button is-static is-small">
@@ -49,7 +49,9 @@
           </div>
         </div>
       </template>
+    <a class="button is-link is-outlined" @click.stop="testCalculatePercentPassing()">Outlined</a>  
     </div>
+    
   </article>
 </template>
 <script>
@@ -57,29 +59,35 @@
     data () {
       return {
         sieveData: [],
-        sampleData: [
+        sampleData: {
+          tareMass: 100,
+          wetMass: 2000,
+          dryMass: 1900,
+          washedMass: 1800
+        },
+        sampleDataForm: [
           {
             property: 'tareMass',
             description: 'Mass of tare',
-            value: 100,
+            value: this.tareMass,
             unit: 'g'
           },
           {
             property: 'wetMass',
             description: 'Sample mass, plus tare',
-            value: 2000,
+            value: this.wetMass,
             unit: 'g'
           },
           {
             property: 'dryMass',
             description: 'Dry mass, plus tare',
-            value: 1900,
+            value: this.dryMass,
             unit: 'g'
           },
           {
             property: 'washedMass',
             description: 'Mass after wash, plus tare',
-            value: 1800,
+            value: this.washedMass,
             unit: 'g'
           }
         ]
@@ -87,8 +95,11 @@
     },
     computed: {
       totalMass () {
+        return this.sampleData.dryMass - this.sampleData.tare
+      },
+      massAllSieves () {
+        /* calculate total mass of all sieves but skip non-numeric inputs */
         return this.sieveData.reduce((total, sieve) => {
-          /* calculate total mass of all sieves but skip non-numeric inputs */
           if (typeof sieve.mass === 'number') {
             return total + sieve.mass
           } else {
@@ -97,19 +108,36 @@
         }, 0)
       },
       calculatePercentPassing () {
-        var sieveResult = []
-        var sieves = this.sieveData
-        for (let i in sieves) {
-          var massPassing = this.totalMass - sieves.slice(0, i + 1).reduce((total, currentSieve) => {
-            return total + currentSieve.mass
+        let sieveResult = []
+        const sieves = this.sieveData
+        /* 
+        We need to calculate the mass of soil that "passed through" each sieve (as opposed to the mass
+        that was retained) in order to plot the result. To do this, start at the first sieve in the
+        array. Subtract the mass retained in that sieve from the total mass of the sample. Then
+        subtract the mass retained in the second sieve, third sieve and so on to calculate the mass 
+        that passed through each sieve.
+
+        The code below runs once for each sieve and calls array.prototype.reduce() with a sum function
+        to determine the mass passing through each sieve, starting from the top sieve down to the bottom
+        sieve.
+        */
+        for (let i = 0; i < sieves.length; i++) {
+          let massPassing = this.totalMass - sieves.slice(0, i + 1).reduce((total, sieve) => {
+            if (typeof sieve.mass === 'number') {
+              return total + sieve.mass
+            } else {
+              return total
+            }
           }, 0)
+          /* add the calculated "passing" values to an array containing the test results */
           sieveResult.push({
             size: sieves[i].size,
             mass: sieves[i].mass,
-            passing: massPassing
+            passing: massPassing,
+            passingPercent: (massPassing / this.totalMass)
           })
         }
-        return sieveResult
+        return (sieveResult)
       }
     },
     methods: {
@@ -138,6 +166,7 @@
         })
       },
       removeSieve () {
+        /* removes the most recently added or smallest sieve */
         if (this.sieveData.length > 0) {
           this.sieveData.pop()
         }
