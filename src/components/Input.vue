@@ -181,7 +181,7 @@
 .m-0 { margin: 0rem; }
 .p-r-2 { padding-right: 2rem; }
 
-/* hide number input field spinner */
+/* hide number input field up/down arrows */
 input[type='number'] {
     -moz-appearance:textfield;
 }
