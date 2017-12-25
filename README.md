@@ -9,13 +9,16 @@ For more background information, see Wikipedia page on [Sieve analysis](https://
 
 Current version:
 * accepts input for particle size analysis results (sample and sieve weights).
-* takes test data and calculates percent passing (ready to graph!)
+* takes test data and calculates percent passing (ready to graph, but not implemented yet)
+* output pane is not functional yet.
 
-Next:
+Next version:
+* Output pane gets data from input pane through vuex
+* Support for storing multiple tests and viewing results later
 * Graph percent passing with chart.js
 * Compare total recorded masses (from each sieve) to total sample weight to determine test error
 
-## Try it out!
+## Installing dev server
 
 ``` bash
 # install dependencies
