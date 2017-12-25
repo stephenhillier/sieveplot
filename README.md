@@ -1,8 +1,21 @@
 # sieveplot
 
-> A geotechnical lab tool for particle size analysis
+> A geotechnical lab tool for particle size analysis.
 
-## Build Setup
+**Note: Work in progress!**
+Not all basic functionality implemented.
+
+For more background information, see Wikipedia page on [Sieve analysis](https://en.wikipedia.org/wiki/Sieve_analysis)
+
+Current version:
+* accepts input for particle size analysis results (sample and sieve weights).
+* takes test data and calculates percent passing (ready to graph!)
+
+Next:
+* Graph percent passing with chart.js
+* Compare total recorded masses (from each sieve) to total sample weight to determine test error
+
+## Try it out!
 
 ``` bash
 # install dependencies
@@ -11,17 +24,6 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
