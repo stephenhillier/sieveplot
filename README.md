@@ -3,7 +3,7 @@
 > A geotechnical lab tool for particle size analysis.
 
 **Note: Work in progress!**
-Not all basic functionality implemented.
+Not all basic functionality implemented yet.
 
 For more background information, see Wikipedia page on [Sieve analysis](https://en.wikipedia.org/wiki/Sieve_analysis)
 
