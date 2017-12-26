@@ -50,8 +50,8 @@
           </div>
         </div>
       </template>
+      <a class="button is-link is-outlined" @click.stop="packageTestData()">Package data as JSON</a>
     </div>
-    
   </article>
 </template>
 <script>
@@ -194,6 +194,17 @@
         if (this.sieveData.length > 0) {
           this.sieveData.pop()
         }
+      },
+      packageTestData () {
+        const testData = {
+          name: '',
+          tareMass: this.sampleData.tareMass,
+          wetMass: this.sampleData.wetMass,
+          dryMass: this.sampleData.dryMass,
+          washedMass: this.sampleData.washedMass,
+          sieveData: JSON.parse(JSON.stringify(this.sieveData))
+        }
+        console.log(testData)
       }
     },
     created: function () {
