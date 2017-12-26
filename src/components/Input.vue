@@ -22,6 +22,7 @@
       <template v-for="(sieve, i) in sieveData">
         <div :key="i" class="field is-grouped m-0" style="margin: 0rem">
           <div class="field">
+            <!-- also displays a label with the first item in list (i.e. i===0) --> 
             <label v-if="!i" class="label is-small">Sieve size</label>
             <div class="field has-addons">
               <p class="control">
@@ -91,9 +92,9 @@
         // sampleDataForm: this array is used to create the sample data form in the template
         sampleDataForm: [
           {
-            property: 'tareMass',
-            description: 'Mass of tare',
-            unit: 'g'
+            property: 'tareMass', // corresponds to the key in sieveData
+            description: 'Mass of tare', // readable description for display
+            unit: 'g' // for displaying unit - in future should be more modular & allow for imperial
           },
           {
             property: 'wetMass',
