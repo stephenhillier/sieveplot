@@ -93,25 +93,21 @@
           {
             property: 'tareMass',
             description: 'Mass of tare',
-            value: this.tareMass,
             unit: 'g'
           },
           {
             property: 'wetMass',
             description: 'Sample mass, plus tare',
-            value: this.wetMass,
             unit: 'g'
           },
           {
             property: 'dryMass',
             description: 'Dry mass, plus tare',
-            value: this.dryMass,
             unit: 'g'
           },
           {
             property: 'washedMass',
             description: 'Mass after wash, plus tare',
-            value: this.washedMass,
             unit: 'g'
           }
         ]
