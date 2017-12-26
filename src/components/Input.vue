@@ -22,7 +22,7 @@
       <template v-for="(sieve, i) in sieveData">
         <div :key="i" class="field is-grouped m-0" style="margin: 0rem">
           <div class="field">
-            <!-- also displays a label with the first item in list (i.e. i===0) --> 
+            <!-- also displays a label with the first item in list (i.e. i==0) --> 
             <label v-if="!i" class="label is-small">Sieve size</label>
             <div class="field has-addons">
               <p class="control">
