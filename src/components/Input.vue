@@ -9,9 +9,18 @@
           <label class="label is-small">{{ sampleProperty.description }}</label>
           <div class="field has-addons">
             <p class="control">
-              <input class="input is-small" type="number" v-model.number="sampleData[sampleProperty.property]" placeholder="Mass">
+              <input v-if="sampleProperty.unit"
+               class="input is-small"
+               type="number"
+               v-model.number="sampleData[sampleProperty.property]"
+               :placeholder="sampleProperty['placeholder']">
+               <input v-else
+               class="input is-small"
+               type="text"
+               v-model="sampleData[sampleProperty.property]"
+               :placeholder="sampleProperty['placeholder']">
             </p>
-            <p class="control">
+            <p v-if="sampleProperty.unit" class="control">
               <a class="button is-static is-small">
                 {{ sampleProperty.unit }}
               </a>
@@ -20,7 +29,7 @@
         </div>
       </template>
       <template v-for="(sieve, i) in sieveData">
-        <div :key="i" class="field is-grouped m-0" style="margin: 0rem">
+        <div :key="i" class="field is-grouped" style="margin: 0rem">
           <div class="field">
             <!-- also displays a label with the first item in list (i.e. i==0) --> 
             <label v-if="!i" class="label is-small">Sieve size</label>
@@ -50,7 +59,7 @@
           </div>
         </div>
       </template>
-      <a class="button is-link is-outlined" @click.stop="packageTestData()">Package data as JSON</a>
+      <a class="button is-link is-outlined" @click.stop="packageTestData()">Show as JSON</a>
     </div>
   </article>
 </template>
@@ -83,6 +92,7 @@
          * contains recorded data for the soil sample being tested
          */
         sampleData: {
+          name: '',
           tareMass: 100,    // mass of the container that the sample is in
           wetMass: 2000,    // mass of soil test sample before drying
           dryMass: 1900,    // mass of dry soil (i.e. for moisture content)
@@ -92,23 +102,33 @@
         // sampleDataForm: this array is used to create the sample data form in the template
         sampleDataForm: [
           {
-            property: 'tareMass', // corresponds to the key in sieveData
-            description: 'Mass of tare', // readable description for display
-            unit: 'g' // for displaying unit - in future should be more modular & allow for imperial
+            property: 'name', // corresponds to the key in sieveData
+            description: 'Sample name', // readable description for display
+            placeholder: 'Name',
+            unit: false // for displaying unit
+          },
+          {
+            property: 'tareMass',
+            description: 'Mass of tare',
+            placeholder: 'Mass',
+            unit: 'g'
           },
           {
             property: 'wetMass',
             description: 'Sample mass, plus tare',
+            placeholder: 'Mass',
             unit: 'g'
           },
           {
             property: 'dryMass',
             description: 'Dry mass, plus tare',
+            placeholder: 'Mass',
             unit: 'g'
           },
           {
             property: 'washedMass',
             description: 'Mass after wash, plus tare',
+            placeholder: 'Mass',
             unit: 'g'
           }
         ]
@@ -197,7 +217,7 @@
       },
       packageTestData () {
         const testData = {
-          name: '',
+          name: this.sampleData.name,
           tareMass: this.sampleData.tareMass,
           wetMass: this.sampleData.wetMass,
           dryMass: this.sampleData.dryMass,
