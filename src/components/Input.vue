@@ -87,6 +87,8 @@
           dryMass: 1900,    // mass of dry soil (i.e. for moisture content)
           washedMass: 1800  // mass of sample after washing fines out (weigh after drying)
         },
+
+        // sampleDataForm: this array is used to create the sample data form in the template
         sampleDataForm: [
           {
             property: 'tareMass',
