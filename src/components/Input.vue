@@ -57,12 +57,35 @@
   export default {
     data () {
       return {
+
+        /**
+         * sieveData
+         * type: array
+         * contains a list of objects with key/value pairs:
+         *  {
+         *    size: number, // nominal size of sieve
+         *    mass: number, // mass of soil retained in sieve (recorded during test)
+         *    sizeUnit: string, // unit of size e.g. 'mm' or 'in'
+         *    massUnit: string // unit of mass e.g. 'g' or 'lb'
+         *  }
+         *
+         * can be modified by methods populateSieveData, addSieve, removeSieve
+         *
+         * Note: for now, use consistent units
+         * (i.e. don't use 'mm' for large sizes and also 'um' for small sizes in the same test)
+         */
         sieveData: [],
+
+        /**
+         * sampleData
+         * type: object
+         * contains recorded data for the soil sample being tested
+         */
         sampleData: {
-          tareMass: 100,
-          wetMass: 2000,
-          dryMass: 1900,
-          washedMass: 1800
+          tareMass: 100,    // mass of the container that the sample is in
+          wetMass: 2000,    // mass of soil test sample before drying
+          dryMass: 1900,    // mass of dry soil (i.e. for moisture content)
+          washedMass: 1800  // mass of sample after washing fines out (weigh after drying)
         },
         sampleDataForm: [
           {
@@ -140,13 +163,16 @@
       }
     },
     methods: {
-      /* populates sieveData with a default set of sieve sizes */
+      // populates sieveData with a default set of sieve sizes
       populateSieveData () {
+        // the sieve sizes (in mm) that appear by default when the page loads
+        const DEFAULT_SIEVE_SIZES = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08, 'Pan']
+
+        // if sieveData array contains no objects, add default ones
         if (this.sieveData.length === 0) {
-          const defaultSieveSizes = [50, 20, 16, 12, 10, 5, 2.5, 1, 0.630, 0.315, 0.160, 0.08, 'Pan']
-          for (let i in defaultSieveSizes) {
+          for (let i = 0; i < DEFAULT_SIEVE_SIZES.length; i++) {
             let defaultSieve = {
-              size: defaultSieveSizes[i],
+              size: DEFAULT_SIEVE_SIZES[i],
               mass: 0,
               sizeUnit: 'mm',
               massUnit: 'g'
