@@ -6,7 +6,8 @@
     <div class="message-body">
       <div class="columns">
         <div class="column">
-
+          <line-chart :chart-data="sieveResult"></line-chart>
+          <a class="button" @click.stop="fillData()">new random data</a>
         </div>
         <div class="column is-narrow">
           <div class="box">
@@ -38,9 +39,12 @@
   </article>
 </template>
 <script>
+  import LineChart from './LineChart.js'
   export default {
+    components: { LineChart },
     data () {
       return {
+        sieveResult: null,
         percentPassing: [
           {
             size: 50,
@@ -64,6 +68,30 @@
             massUnit: 'g'
           }
         ]
+      }
+    },
+    mounted () {
+      this.fillData()
+    },
+    methods: {
+      fillData () {
+        this.sieveResult = {
+          labels: [this.getRandomInt(), this.getRandomInt()],
+          datasets: [
+            {
+              label: 'Random test data',
+              backgroundColor: '#f87979',
+              data: [this.getRandomInt(), this.getRandomInt()]
+            }, {
+              label: 'More test data',
+              backgroundColor: '#387979',
+              data: [this.getRandomInt(), this.getRandomInt()]
+            }
+          ]
+        }
+      },
+      getRandomInt () {
+        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
       }
     }
   }
