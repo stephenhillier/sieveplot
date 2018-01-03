@@ -18,8 +18,8 @@
               </thead>
               <tfoot>
                 <th></th>
-                <th>Error:</th>
-                <th>0.3%</th>
+                <th></th> <!-- TODO: Error calculation -->
+                <th></th>
               </tfoot>
               <tbody>
                 <template v-for="sieve in result">
@@ -44,43 +44,7 @@
   export default {
     components: { LineChart },
     data () {
-      return {
-        chartOptions: {
-          scales: {
-            xAxes: [{
-              type: 'linear',
-              display: 'true',
-              ticks: {
-                reverse: true
-              }
-            }]
-          }
-        },
-        sieveResult: null,
-        percentPassing: [
-          {
-            size: 50,
-            mass: 220,
-            passing: 90,
-            sizeUnit: 'mm',
-            massUnit: 'g'
-          },
-          {
-            size: 20,
-            mass: 350,
-            passing: 75,
-            sizeUnit: 'mm',
-            massUnit: 'g'
-          },
-          {
-            size: 16,
-            mass: 155,
-            passing: 65,
-            sizeUnit: 'mm',
-            massUnit: 'g'
-          }
-        ]
-      }
+      return {}
     },
     computed: {
       result () {
