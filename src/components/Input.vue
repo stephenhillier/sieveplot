@@ -59,11 +59,13 @@
           </div>
         </div>
       </template>
-      <a class="button is-link is-outlined" @click.stop="packageTestData()">Show as JSON</a>
+      <a class="button is-link is-outlined" @click.stop="packageTestData()">Update test result</a>
     </div>
   </article>
 </template>
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data () {
       return {
@@ -182,6 +184,10 @@
       }
     },
     methods: {
+      // provides access to setTestData action (in vuex store/store.js) to commit test results to state
+      ...mapActions([
+        'setTestData'
+      ]),
       // populates sieveData with a default set of sieve sizes
       populateSieveData () {
         // the sieve sizes (in mm) that appear by default when the page loads
@@ -225,6 +231,7 @@
           sieveData: JSON.parse(JSON.stringify(this.sieveData))
         }
         console.log(testData)
+        this.setTestData(testData)
       }
     },
     created: function () {
