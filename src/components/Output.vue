@@ -6,7 +6,11 @@
     <div class="message-body">
       <div class="columns">
         <div class="column">
-          <line-chart :chart-data="sievePlot" :chart-options="chartOptions"></line-chart>
+          <line-chart
+          :chart-data="sievePlot"
+          :options="{responsive: false, maintainAspectRatio: false}"
+          :height="882"
+          :width="1000"></line-chart>
         </div>
         <div class="column is-narrow">
           <div class="box">
@@ -60,16 +64,19 @@
           // create new arrays for sizes and percent passing for plotting
           let sizes = this.result.map(item => {
             // only for objects with a valid size
-            if (item['size']) {
+            if (item['size'] && item['size'] !== 'Pan') {
               return item['size']
             }
-          })
+            return null
+          }).filter(x => x !== null)
           let passing = this.result.map(item => {
             // still looking only for objects that have a valid size
-            if (item['size']) {
+            if (item['size'] && item['size'] !== 'Pan') {
               return item['passingPercent']
             }
-          })
+            return null
+          }).filter(x => x !== null)
+          console.log(passing, sizes)
           // TODO: to NOT form chart object this way
           return {
             labels: sizes.reverse(),
