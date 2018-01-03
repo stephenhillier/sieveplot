@@ -118,6 +118,8 @@
           The code below runs once for each sieve and calls array.prototype.reduce() with a sum function
           to determine the mass passing through each sieve, starting from the top sieve down to the bottom
           sieve.
+
+          The runtime increases quickly with increasing n (nested loop), but n is limited to about 12
           */
           for (let i = 0; i < sieves.length; i++) {
             let massPassing = testData.dryMass - sieves.slice(0, i + 1).reduce((total, sieve) => {
