@@ -21,6 +21,9 @@ Next version:
 * ~~Graph percent passing with chart.js~~ done
 * Compare total recorded masses (from each sieve) to total sample weight to determine test error
 
+## Frameworks/dependencies
+Made with Vue.JS, vuex, Bulma, chart.js and vue-chartjs (a wrapper for using chart.js in Vue)
+
 ## Installing dev server
 
 ``` bash
