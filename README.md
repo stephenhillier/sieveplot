@@ -2,6 +2,8 @@
 
 > A geotechnical lab tool for particle size analysis.
 
+![sieveplot screengrab](./Screenshot.png)
+
 **Note: Work in progress!**
 Not all basic functionality implemented yet.
 
@@ -9,13 +11,14 @@ For more background information, see Wikipedia page on [Sieve analysis](https://
 
 Current version:
 * accepts input for particle size analysis results (sample and sieve weights).
-* takes test data and calculates percent passing (ready to graph, but not implemented yet)
-* output pane is not functional yet.
+* sends inputted test data into the app's vuex store
+* output pane grabs data object from store and plots the test result.
+* ***note***: vuex may be overkill but future plans include working with larger sets of data (e.g. previously entered test results)
 
 Next version:
-* Output pane gets data from input pane through vuex
+* ~~Output pane gets data from input pane through vuex~~ done
 * Support for storing multiple tests and viewing results later
-* Graph percent passing with chart.js
+* ~~Graph percent passing with chart.js~~ done
 * Compare total recorded masses (from each sieve) to total sample weight to determine test error
 
 ## Installing dev server
