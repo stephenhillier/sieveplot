@@ -59,7 +59,7 @@
           </div>
         </div>
       </template>
-      <a class="button is-link is-outlined" @click.stop="packageTestData()">Update test result</a>
+      <a class="button is-link is-outlined" @click="packageTestData()">Update test result</a>
     </div>
   </article>
 </template>
