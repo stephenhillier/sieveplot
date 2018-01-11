@@ -16,10 +16,10 @@ Current version:
 * ***note***: vuex may be overkill but future plans include working with larger sets of data (e.g. previously entered test results)
 
 Next version:
-* ~~Output pane gets data from input pane through vuex~~ done
+* Import classes/methods from new [geotech-utils](https://github.com/stephenhillier/geotech-utils) library
 * Support for storing multiple tests and viewing results later
 * ~~Graph percent passing with chart.js~~ done
-* Compare total recorded masses (from each sieve) to total sample weight to determine test error
+* ~~Output pane gets data from input pane through vuex~~ done
 
 ## Frameworks/dependencies
 Made with Vue.JS, vuex, Bulma, chart.js and vue-chartjs (a wrapper for using chart.js in Vue)
